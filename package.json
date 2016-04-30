@@ -7,5 +7,16 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.3.5",
+    "csv-parser": "^1.9.3",
+    "pg": "^4.5.5",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^3.22.0",
+    "sprom": "^2.1.0",
+    "strip-bom": "^2.0.0",
+    "strip-bom-stream": "^2.0.0",
+    "underscore": "^1.8.3"
+  }
 }
