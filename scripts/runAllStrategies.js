@@ -42,15 +42,6 @@ var executeStrategies = function(ticker, days) {
   return results;
 };
 
-var stringify = function(gains) {
-  var res = "";
-  for (var key in gains) {
-    res += "\t" + key + ": " + gains[key];
-  }
-  return res;
-}
-
-
 var printResults = function() {
   StrategyResult.findAll().then(function(results) {
     var groupedRes = _.groupBy(results, function(result) {
@@ -58,11 +49,7 @@ var printResults = function() {
     });
 
     for (var name in groupedRes) {
-      console.log("Strategy: " + name);
-      console.log("Description: " + groupedRes[name][0].description)
-      groupedRes[name].forEach(function(result) {
-        console.log(result.ticker + "\t" + stringify(result.gains));
-      });
+      strategies[name].printResults(name, groupedRes[name]);
     }
   })
 };
