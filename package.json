@@ -11,6 +11,7 @@
   "dependencies": {
     "bluebird": "^3.3.5",
     "csv-parser": "^1.9.3",
+    "download": "^4.4.3",
     "pg": "^4.5.5",
     "pg-hstore": "^2.3.2",
     "sequelize": "^3.22.0",

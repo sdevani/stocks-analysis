@@ -34,6 +34,42 @@ var Stock = sequelize.define('stock', {
   low: {
     type: Sequelize.FLOAT,
     field: 'low'
+  },
+  hammer: {
+    type: Sequelize.BOOLEAN,
+    field: 'hammer'
+  },
+  decreaseHalfPercent: {
+    type: Sequelize.BOOLEAN,
+    field: 'decreaseHalfPercent'
+  },
+  tripleDecreases: {
+    type: Sequelize.BOOLEAN,
+    field: 'tripleDecreases'
+  },
+  smallBody: {
+    type: Sequelize.BOOLEAN,
+    field: 'smallBody'
+  },
+  oneDayDelta: {
+    type: Sequelize.FLOAT,
+    field: 'oneDayDelta'
+  },
+  oneWeekDelta: {
+    type: Sequelize.FLOAT,
+    field: 'oneWeekDelta'
+  },
+  oneMonthDelta: {
+    type: Sequelize.FLOAT,
+    field: 'oneMonthDelta'
+  },
+  oneQuarterDelta: {
+    type: Sequelize.FLOAT,
+    field: 'oneQuarterDelta'
+  },
+  oneYearDelta: {
+    type: Sequelize.FLOAT,
+    field: 'oneYearDelta'
   }
 });
 
@@ -56,7 +92,7 @@ var StrategyResult = sequelize.define('strategyResult', {
   }
 });
 
-// Stock.sync().then(function() {
+// Stock.sync({force: true}).then(function() {
 //   console.log("Stock table created");
 // });
 

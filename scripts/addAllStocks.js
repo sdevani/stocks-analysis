@@ -11,7 +11,7 @@ var tickers = stockTickers.stocks;
 var Stock = db.Stock;
 
 var addTickerData = function(ticker) {
-  var fileName = "./stockReports/" + ticker + ".csv";
+  var fileName = "./fortune500StockReports/" + ticker + ".csv";
 
   var rows = [];
   var gatherRows = new Promise(function(resolve, reject) {
@@ -24,7 +24,7 @@ var addTickerData = function(ticker) {
           open: data.Open,
           close: data.Close,
           low: data.Low,
-          high: data.high,
+          high: data.High,
           date: data.Date
         });
       }).on('finish', function() {
