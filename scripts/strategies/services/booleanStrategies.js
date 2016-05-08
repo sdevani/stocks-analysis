@@ -1,3 +1,11 @@
+var strategyRunner = require('./strategyRunner.js');
+
+var addBooleanStrategy = function(booleanFunc, options) {
+  var printer = options.printer || standardPrinter;
+  var strategy = generateBooleanStrategy(booleanFunc, options);
+  strategyRunner.addStrategy(strategy, printer);
+};
+
 var generateBooleanStrategy = function(booleanFunc, options) {
   var daysToHold = options.daysToHold || 1;
   var buyAt = options.buyAt || 'open';
@@ -26,6 +34,18 @@ var generateBooleanStrategy = function(booleanFunc, options) {
     });
     return results;
   }
+};
+
+var standardPrinter = function(name, results) {
+  var res = "STRATEGY: " + name + "\n";
+  res += "BuyTriggers: " + results.buyTriggers + "\t";
+  if (results.buyTriggers === 0) { console.log(res, "\n"); return;}
+
+  res += "Profits: " + results.profits/results.buyTriggers + "\t";
+  res += "ProfitableDays: " + results.profitableDays / results.buyTriggers * 100 + "\t";
+  res += "positiveProfits: " + results.positiveProfits / results.buyTriggers * 100 + "\t";
+  res += "negativeProfits: " + results.negativeProfits / results.buyTriggers * 100 + "\t";
+  console.log(res, "\n");
 };
 
 var standardSell = function(daysToHold, buyAt, sellAt) {
@@ -64,4 +84,8 @@ var addProfitToResult = function(results, profit) {
   return results;
 };
 
-module.exports = generateBooleanStrategy;
+module.exports = {
+  generateBooleanStrategy: generateBooleanStrategy,
+  addBooleanStrategy: addBooleanStrategy,
+  standardPrinter: standardPrinter
+};
