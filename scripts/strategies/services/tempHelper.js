@@ -92,8 +92,20 @@ var earlySell = function(daysToHold, buyAt, sellAt, target) {
   }
 }
 
-var run = function() {
-  var sellFunction = standardSell(DAYS_TO_HOLD, 'open', 'close');
+var run = function(options) {
+  if (!options) { options = {}; }
+  var daysToHold = options.daysToHold || DAYS_TO_HOLD;
+  var buyAt = options.buyAt || 'open';
+  var sellAt = options.sellAt || 'close';
+  var target = options.target || MINIMUM_WIN;
+  var sellFunction;
+
+  if (options.earlySell) {
+    sellFunction = earlySell(daysToHold, buyAt, sellAt, target);
+  } else {
+    sellFunction = standardSell(daysToHold, buyAt, sellAt);
+  }
+
   Stock.findAll({
     order: [['date', 'ASC']]
   }).then(function(stocks) {
