@@ -72,7 +72,7 @@ var printResults = function(results) {
 var standardSell = function(daysToHold, buyAt, sellAt) {
   return function(stocks, i) {
     var stocksBought = 100/stocks[i + 1][buyAt];
-    var profit = stocks[i + 1 + daysToHold][sellAt] * stocksBought - 100;
+    var profit = stocks[i + daysToHold][sellAt] * stocksBought - 100;
     return profit;
   };
 };
@@ -83,7 +83,7 @@ var earlySell = function(daysToHold, buyAt, sellAt, target) {
     var stocksBought = 100/stocks[i + 1][buyAt];
     var targetPrice = (100 + target)/stocksBought;
     var firstDay = i + 1;
-    var lastDay = i + daysToHold + 1;
+    var lastDay = i + daysToHold;
     if (sellAt === 'open') { lastDay--; }
     for (var day = firstDay; day <= lastDay; day++) {
       if (stocks[day].high > targetPrice) { return target; }
@@ -93,7 +93,7 @@ var earlySell = function(daysToHold, buyAt, sellAt, target) {
 }
 
 var run = function() {
-  // var sellFunction = standardSell(DAYS_TO_HOLD, 'open', 'close');
+  var sellFunction = standardSell(DAYS_TO_HOLD, 'open', 'close');
   Stock.findAll({
     order: [['date', 'ASC']]
   }).then(function(stocks) {
@@ -103,10 +103,8 @@ var run = function() {
       var stocks = stockByTicker[ticker];
       for (var i = 1; i < stocks.length - 1 - DAYS_TO_HOLD; i++) {
         var stock = stocks[i];
-        // var stockYear = stock.date.getFullYear();
-        var stocksBought = 10000/(stocks[i+1].open);
-        var profit = stocksBought * stocks[i+DAYS_TO_HOLD].close - 10000;
-        if (isNaN(profit) || profit < -5000 || profit > 5000) { continue; }
+        var profit = sellFunction(stocks, i);
+        if (isNaN(profit) || profit < -50 || profit > 50) { continue; }
         for (var strategy in results) {
           var strategyFunction = results[strategy].strategyFunction;
           if (strategyFunction(stock, stocks, i)) {
