@@ -33,73 +33,7 @@ var categoryStrategy = function(year, quarter, month, week, day) {
   }
 };
 
-// day value at 2 (18, 20, 28)
-// week value at 3 (4, 11, 22, 28, )
-// month value at
-
-// generateStrategyPerYear(categoryStrategy(-1, -1, 1, -1, -1));
-
-// addStrategyToResult(categoryStrategy(1, 1, 1, 1, 1));
-// addStrategyToResult(categoryStrategy(1, 1, 1, 1, -1));
-// addStrategyToResult(categoryStrategy(1, 1, 1, -1, 1));
-// addStrategyToResult(categoryStrategy(1, 1, 1, -1, -1));
-// addStrategyToResult(categoryStrategy(1, 1, -1, 1, 1));
-// addStrategyToResult(categoryStrategy(1, 1, -1, 1, -1));
-// addStrategyToResult(categoryStrategy(1, 1, -1, -1, 1));
-// addStrategyToResult(categoryStrategy(1, 1, -1, -1, -1));
-// addStrategyToResult(categoryStrategy(1, -1, 1, 1, 1));
-// addStrategyToResult(categoryStrategy(1, -1, 1, 1, -1));
-// addStrategyToResult(categoryStrategy(1, -1, 1, -1, 1));
-// addStrategyToResult(categoryStrategy(1, -1, 1, -1, -1));
-// addStrategyToResult(categoryStrategy(1, -1, -1, 1, 1));
-// addStrategyToResult(categoryStrategy(1, -1, -1, 1, -1));
-// addStrategyToResult(categoryStrategy(1, -1, -1, -1, 1));
-// addStrategyToResult(categoryStrategy(1, -1, -1, -1, -1));
-// addStrategyToResult(categoryStrategy(-1, 1, 1, 1, 1));
-// addStrategyToResult(categoryStrategy(-1, 1, 1, 1, -1)); // this 18
-// addStrategyToResult(categoryStrategy(-1, 1, 1, -1, 1));
-// addStrategyToResult(categoryStrategy(-1, 1, 1, -1, -1)); // this 20
-// addStrategyToResult(categoryStrategy(-1, 1, -1, 1, 1));
-// addStrategyToResult(categoryStrategy(-1, 1, -1, 1, -1));
-// addStrategyToResult(categoryStrategy(-1, 1, -1, -1, 1));
-// addStrategyToResult(categoryStrategy(-1, 1, -1, -1, -1));
-// addStrategyToResult(categoryStrategy(-1, -1, 1, 1, 1));
-// addStrategyToResult(categoryStrategy(-1, -1, 1, 1, -1));
-// addStrategyToResult(categoryStrategy(-1, -1, 1, -1, 1));
-// addStrategyToResult(categoryStrategy(-1, -1, 1, -1, -1)); // this 28
-// addStrategyToResult(categoryStrategy(-1, -1, -1, 1, 1));
-// addStrategyToResult(categoryStrategy(-1, -1, -1, 1, -1));
-// addStrategyToResult(categoryStrategy(-1, -1, -1, -1, 1));
-// addStrategyToResult(categoryStrategy(-1, -1, -1, -1, -1));
-
-
-// generateStrategyPerYear(highToLowStrategy(10, 3, -4, 0.25));
-// addStrategyToResult(highToLowStrategy());
-
-// generateStrategyPerYear(standardStrategy);
-
-// addStrategyToResult(function(stock, stocks, i) {
-//   return stock.oneYearDelta >= 10;
-// });
-
-// addStrategyToResult(function(stock, stocks, i) {
-//   return stock.oneYearDelta >= 10 && stock.oneQuarterDelta > 5;
-// });
-
-// addStrategyToResult(function(stock, stocks, i) {
-//   return stock.oneYearDelta >= 10 && stock.oneQuarterDelta > 5 && stock.oneWeekDelta < -3;
-// });
-
-// addStrategyToResult(function(stock, stocks, i) {
-//   return stock.oneYearDelta >= 10 && stock.oneQuarterDelta > 5 && stock.oneWeekDelta < -3 && stock.oneDayDelta > 1;
-// });
-
-// addStrategyToResult(function(stock, stocks, i) {
-//   return stock.oneQuarterDelta > 5 && stock.oneWeekDelta < -3 && stock.oneDayDelta > 1;
-// });
-
-// addStrategyToResult(function(stock, stocks, i) {
-//   return stock.oneWeekDelta < -3 && stock.oneDayDelta > 1;
-// });
-
-tempHelper.run();
+tempHelper.run({
+  // earlySell: true,
+  // targetPrice: 3
+});

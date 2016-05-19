@@ -1,23 +1,27 @@
+var tempHelper = require('./services/tempHelper.js');
 // bullish counterattack
 // bullish piercing
 // bullish engulfing
 
 var decreasingPattern = function(stocks, i) {
-  if (stock[i - 1].oneWeekDelta >= -3) { return false; }
-  if (stock[i - 1].oneDayDelta >= -1) { return false; }
+  if(stocks[i].oneQuarterDelta < 2) { return false; }
+  if (stocks[i - 1].oneWeekDelta >= -3) { return false; }
+  if (stocks[i - 1].oneDayDelta >= -1) { return false; }
   for (var index = i - 5; i <= index - 1; index++) {
     if (stocks[index].oneDayDelta >= 0.25) { return false; }
   }
+  return true;
 };
 
 var isCloseTo = function(first, second) {
-  Math.abs((first.close - second.close)/first.close) <= 0.002
+  if (!first || !second) { return false; }
+  return Math.abs((first.close - second.close)/first.close) <= 0.002
 }
 
 var counterattack = function(stock, stocks, i) {
   return decreasingPattern(stocks, i) &&        // general trend is decreasing
     stock.close > stock.open * 1.005 &&          // the day's trend in increasing
-    isCloseTo(stock.close, stock[i-1].close);   // the close of today is close to close of yesterday
+    isCloseTo(stock, stocks[i-1]);   // the close of today is close to close of yesterday
 };
 
 var isInMiddleOf = function(price, stock) {
@@ -48,3 +52,22 @@ var engulfing = function(stock, stocks, i) {
     stock.close > stock.open * 1.005 &&     // the day's trend is increasing
     isEngulfing(stock, stocks[i - 1]);      // stock closes in middle of next day
 };
+
+tempHelper.addStrategyToResult(counterattack);
+tempHelper.addStrategyToResult(piercing);
+tempHelper.addStrategyToResult(engulfing);
+// tempHelper.run({
+//   earlySell: true,
+//   targetPrice: 1,
+//   daysToHold: 5
+// });
+// tempHelper.run({
+//   earlySell: true,
+//   targetPrice: 2,
+//   daysToHold: 5
+// });
+tempHelper.run({
+  earlySell: true,
+  targetPrice: 3,
+  daysToHold: 5
+});

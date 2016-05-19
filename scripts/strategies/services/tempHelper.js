@@ -71,6 +71,7 @@ var printResults = function(results) {
 
 var standardSell = function(daysToHold, buyAt, sellAt) {
   return function(stocks, i) {
+    if (!stocks[i + daysToHold]) { return; }
     var stocksBought = 100/stocks[i + 1][buyAt];
     var profit = stocks[i + daysToHold][sellAt] * stocksBought - 100;
     return profit;
@@ -86,7 +87,7 @@ var earlySell = function(daysToHold, buyAt, sellAt, target) {
     var lastDay = i + daysToHold;
     if (sellAt === 'open') { lastDay--; }
     for (var day = firstDay; day <= lastDay; day++) {
-      if (stocks[day].high > targetPrice) { return target; }
+      if (stocks[day] && stocks[day].high > targetPrice) { return target; }
     }
     return backupSell(stocks, i);
   }
@@ -97,7 +98,7 @@ var run = function(options) {
   var daysToHold = options.daysToHold || DAYS_TO_HOLD;
   var buyAt = options.buyAt || 'open';
   var sellAt = options.sellAt || 'close';
-  var target = options.target || MINIMUM_WIN;
+  var target = options.targetPrice || MINIMUM_WIN;
   var sellFunction;
 
   if (options.earlySell) {
